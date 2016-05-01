@@ -74,14 +74,18 @@ public class WeatherAction extends ActionSupport {
 			return SUCCESS;
 		}
 		dataMap.put("code", 0);
-		dataMap.put("lat", getLat());
-		dataMap.put("lon", getLon());
-		Map<String,Object> tempMap = new HashMap<>();
-		tempMap.put("irradiance", new double[]{1,2,3,4,5,6,7,8,9,10,11,12});
-		tempMap.put("temperature", new double[]{1,2,3,4,5,6,7,8,9,10,11,12});
-		tempMap.put("humidity", new double[]{1,2,3,4,5,6,7,8,9,10,11,12});
-		tempMap.put("wind", new double[]{1,2,3,4,5,6,7,8,9,10,11,12});
-		dataMap.put("data", tempMap);
+		dataMap.put("lat", latValue);
+		dataMap.put("lon", lonValue);
+		Map<String,Object>[] dataArray = new Map[12];
+		for(int i = 0; i < 12; ++i){
+			Map<String,Object> tempMap = new HashMap<>();
+			tempMap.put("i", (double)i + 1);
+			tempMap.put("t", (double)i + 1);
+			tempMap.put("h", (double)i + 1);
+			tempMap.put("w", (double)i + 1);
+			dataArray[i] = tempMap;
+		}
+		dataMap.put("data", dataArray);
 		return SUCCESS;
 	}
 }
