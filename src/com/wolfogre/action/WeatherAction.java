@@ -2,6 +2,13 @@ package com.wolfogre.action;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.wolfogre.domain.Weather;
+import com.wolfogre.domain.WeatherPK;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
+import org.hibernate.service.ServiceRegistryBuilder;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -54,6 +61,7 @@ public class WeatherAction extends ActionSupport {
 		}
 
 		double latValue, lonValue;
+
 		try{
 			latValue = Double.parseDouble(lat);
 			lonValue = Double.parseDouble(lon);
@@ -68,24 +76,70 @@ public class WeatherAction extends ActionSupport {
 			return SUCCESS;
 		}
 
+		latValue = (Math.round(latValue + 0.5) + 90) % 180 - 90 - 0.5;
+		lonValue = (Math.round(lonValue + 0.5) + 180) % 360 - 180  - 0.5;
+
 		if(actionContext.getParameters().size() != 2)
 		{
 			dataMap.put("code", 5);
 			return SUCCESS;
 		}
-		dataMap.put("code", 0);
+
+		Configuration configuration = new Configuration().configure();
+		ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
+		SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+		Session session = sessionFactory.openSession();
+
+		Weather irradiance = (Weather)session.get(Weather.class, new WeatherPK("irradiance", latValue, lonValue));
+		Weather temperature = (Weather)session.get(Weather.class, new WeatherPK("temperature", latValue, lonValue));
+		Weather humidity = (Weather)session.get(Weather.class, new WeatherPK("humidity", latValue, lonValue));
+		Weather wind = (Weather)session.get(Weather.class, new WeatherPK("wind", latValue, lonValue));
+
+		session.close();
+		sessionFactory.close();
+
+		if(irradiance == null || temperature == null || humidity == null || wind == null)
+		{
+			dataMap.put("code", 6);
+			return SUCCESS;
+		}
+
+		Double[] irradianceData = getDataArray(irradiance);
+		Double[] temperatureData = getDataArray(temperature);
+		Double[] humidityData = getDataArray(humidity);
+		Double[] windData = getDataArray(wind);
+
 		dataMap.put("lat", latValue);
 		dataMap.put("lon", lonValue);
+
 		Map<String,Object>[] dataArray = new Map[12];
 		for(int i = 0; i < 12; ++i){
 			Map<String,Object> tempMap = new HashMap<>();
-			tempMap.put("i", (double)i + 1);
-			tempMap.put("t", (double)i + 1);
-			tempMap.put("h", (double)i + 1);
-			tempMap.put("w", (double)i + 1);
+			tempMap.put("i", irradianceData[i]);
+			tempMap.put("t", temperatureData[i]);
+			tempMap.put("h", humidityData[i]);
+			tempMap.put("w", windData[i]);
 			dataArray[i] = tempMap;
 		}
 		dataMap.put("data", dataArray);
+		dataMap.put("code", 0);
 		return SUCCESS;
+	}
+
+	protected Double[] getDataArray(Weather weather){
+		Double[] result = new Double[12];
+		result[0] = weather.getJan();
+		result[1] = weather.getFeb();
+		result[2] = weather.getMar();
+		result[3] = weather.getApr();
+		result[4] = weather.getMay();
+		result[5] = weather.getJun();
+		result[6] = weather.getJul();
+		result[7] = weather.getAug();
+		result[8] = weather.getSep();
+		result[9] = weather.getOct();
+		result[10] = weather.getNov();
+		result[11] = weather.getDec();
+		return result;
 	}
 }
