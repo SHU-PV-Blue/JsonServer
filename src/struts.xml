@@ -16,17 +16,17 @@
                 <param name="root">dataMap</param>
             </result>
         </action>
-        <action name="inverter-tandem" class="com.wolfogre.action.InverterTandemAction">
+        <action name="inverter-tandem" class="com.wolfogre.action.InverterAction" method="tandem">
             <result type="json">
                 <param name="root">dataMap</param>
             </result>
         </action>
-        <action name="inverter-centralized" class="com.wolfogre.action.InverterCentralizedAction">
+        <action name="inverter-centralized" class="com.wolfogre.action.InverterAction" method="centralized">
             <result type="json">
                 <param name="root">dataMap</param>
             </result>
         </action>
-        <action name="inverter-phase" class="com.wolfogre.action.InverterPhaseAction">
+        <action name="inverter-phase" class="com.wolfogre.action.InverterAction" method="phase">
             <result type="json">
                 <param name="root">dataMap</param>
             </result>

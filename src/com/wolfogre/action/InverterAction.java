@@ -2,16 +2,17 @@ package com.wolfogre.action;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.wolfogre.domain.InverterCentralized;
+import com.wolfogre.domain.InverterPhase;
 import com.wolfogre.domain.InverterTandem;
-import com.wolfogre.domain.PvModule;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.internal.SQLQueryImpl;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,10 +20,10 @@ import java.util.Map;
 /**
  * Created by Jason Song(wolfogre.com) on 2016/5/2.
  */
-public class InverterTandemAction extends ActionSupport {
-	private Map<String,Object> dataMap;
+public class InverterAction extends ActionSupport {
+	private Map<String, Object> dataMap;
 
-	public InverterTandemAction() {
+	public InverterAction() {
 		dataMap = new HashMap<>();
 	}
 
@@ -34,8 +35,19 @@ public class InverterTandemAction extends ActionSupport {
 		this.dataMap = dataMap;
 	}
 
-	@Override
-	public String execute() throws Exception {
+	public String tandem(){
+		return loadData("inverter-tandem");
+	}
+
+	public String centralized(){
+		return loadData("inverter-centralized");
+	}
+
+	public String phase(){
+		return loadData("inverter-phase");
+	}
+
+	String loadData(String dataSource){
 		dataMap.clear();
 		ActionContext actionContext = ActionContext.getContext();
 
@@ -50,10 +62,16 @@ public class InverterTandemAction extends ActionSupport {
 		SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 		Session session = sessionFactory.openSession();
 
-		SQLQuery sqlQuery = session.createSQLQuery("SELECT * FROM `inverter-tandem`").addEntity(InverterTandem.class);
-		List<InverterTandem> inverterTandemList;
+		SQLQuery sqlQuery = session.createSQLQuery("SELECT * FROM `" + dataSource + "`");
+		if("inverter-tandem".equals(dataSource))
+			sqlQuery.addEntity(InverterTandem.class);
+		if("inverter-centralized".equals(dataSource))
+			sqlQuery.addEntity(InverterCentralized.class);
+		if("inverter-phase".equals(dataSource))
+			sqlQuery.addEntity(InverterPhase.class);
+		List inverterList;
 		try{
-			inverterTandemList = sqlQuery.list();
+			inverterList = sqlQuery.list();
 		}catch (Exception ex){
 			session.close();
 			sessionFactory.close();
@@ -64,14 +82,13 @@ public class InverterTandemAction extends ActionSupport {
 		session.close();
 		sessionFactory.close();
 
-		if(inverterTandemList.isEmpty()){
+		if(inverterList.isEmpty()){
 			dataMap.put("code", 6);
 			return SUCCESS;
 		}
 
-		dataMap.put("data", inverterTandemList);
+		dataMap.put("data", inverterList);
 		dataMap.put("code", 0);
-
 
 		return SUCCESS;
 	}
