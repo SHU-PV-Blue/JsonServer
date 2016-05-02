@@ -6,7 +6,27 @@
 
 <struts>
     <package name="com.wolfogre.pvdata" namespace="/" extends="json-default">
-    <action name="weather" class="com.wolfogre.action.WeatherAction">
+        <action name="weather" class="com.wolfogre.action.WeatherAction">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        <action name="pv-module" class="com.wolfogre.action.PvModuleAction">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        <action name="inverter-tandem" class="com.wolfogre.action.InverterTandemAction">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        <action name="inverter-centralized" class="com.wolfogre.action.InverterCentralizedAction">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        <action name="inverter-phase" class="com.wolfogre.action.InverterPhaseAction">
             <result type="json">
                 <param name="root">dataMap</param>
             </result>

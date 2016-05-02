@@ -76,6 +76,7 @@ public class WeatherAction extends ActionSupport {
 			return SUCCESS;
 		}
 
+		//计算最靠近的坐标记录点
 		latValue = (Math.round(latValue + 0.5) + 90) % 180 - 90 - 0.5;
 		lonValue = (Math.round(lonValue + 0.5) + 180) % 360 - 180  - 0.5;
 

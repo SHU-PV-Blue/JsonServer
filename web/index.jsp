@@ -61,7 +61,7 @@
         <td>7</td><td>访问过频</td>
       </tr>
       <tr>
-        <td>8</td><td>黑名单禁止访问</td>
+        <td>8</td><td>无权访问</td>
       </tr>
       <tr>
         <td>9</td><td>未定义</td>
