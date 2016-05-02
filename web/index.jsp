@@ -23,7 +23,10 @@
 </div>
 <div class="panel panel-default center-block text-center" style="width:800px;padding:30px">
   <h2><a href="weather/index.jsp">气象数据接口</a></h2>
-  <h2><a href="#">其他接口正在赶工</a></h2>
+  <h2><a href="pv-module/index.jsp">光伏组件数据接口</a></h2>
+  <h2><a href="inverter-tandem/index.jsp">组串式逆变器数据接口</a></h2>
+  <h2><a href="inverter-centralized/index.jsp">集中式逆变器数据接口</a></h2>
+  <h2><a href="inverter-phase/index.jsp">相位逆变器数据接口</a></h2>
 </div>
 <div class="panel panel-default center-block text-center" style="width:800px;padding:10px">
   <h2>通用状态码说明：</h2>
