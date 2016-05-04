@@ -31,5 +31,20 @@
                 <param name="root">dataMap</param>
             </result>
         </action>
+        <action name="dc-combiner" class="com.wolfogre.action.DcCombinerAction">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        <action name="cable" class="com.wolfogre.action.CableAction">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        <action name="dc-distribution" class="com.wolfogre.action.DcDistributionAction">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
     </package>
 </struts>
