@@ -28,6 +28,7 @@
   <h2>2.响应信息：</h2>
   <p class="lead">&nbsp;&nbsp;&nbsp;&nbsp;所有的相位逆变器（目前含单相和三相）的数据：</p>
   <p class="lead">
+   &nbsp;&nbsp;&nbsp;&nbsp;id（目前无意义），<br/>
    &nbsp;&nbsp;&nbsp;&nbsp;候选键{相位，厂家，型号}（相位字段可能是冗余的候选，目前不影响）<br/>
    &nbsp;&nbsp;&nbsp;&nbsp;额定输入电压（V）<br/>
    &nbsp;&nbsp;&nbsp;&nbsp;额定输入电流（A）<br/>

@@ -15,33 +15,24 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
 
-  <title>集中式逆变器数据接口</title>
+  <title>电缆数据接口</title>
 </head>
 <body>
 <div class="page-header">
-  <h1 class="text-center">集中式逆变器数据接口</h1>
+  <h1 class="text-center">电缆数据接口</h1>
   <h2 align="right"><a href="../index.jsp">返回主页</a></h2>
 </div>
 
 <div class="panel panel-default center-block" style="width:800px;padding:30px">
   <h2>1.请求接口：</h2>
-  <p class="lead">&nbsp;&nbsp;&nbsp;&nbsp;/inverter-centralized</p>
+  <p class="lead">&nbsp;&nbsp;&nbsp;&nbsp;/cable</p>
   <h2>2.响应信息：</h2>
-  <p class="lead">&nbsp;&nbsp;&nbsp;&nbsp;所有的集中式逆变器数据：</p>
+  <p class="lead">&nbsp;&nbsp;&nbsp;&nbsp;所有的电缆数据：</p>
   <p class="lead">
     &nbsp;&nbsp;&nbsp;&nbsp;id（目前无意义），<br/>
-    &nbsp;&nbsp;&nbsp;&nbsp;候选键{厂家，型号}<br/>
-    &nbsp;&nbsp;&nbsp;&nbsp;最大直流输入功率（W）<br/>
-    &nbsp;&nbsp;&nbsp;&nbsp;最大输入电压（V）<br/>
-    &nbsp;&nbsp;&nbsp;&nbsp;启动电压（V）<br/>
-    &nbsp;&nbsp;&nbsp;&nbsp;MPP电压下限（V）<br/>
-    &nbsp;&nbsp;&nbsp;&nbsp;MPP电压上限（V）<br/>
-    &nbsp;&nbsp;&nbsp;&nbsp;最大直流输入电流（A）<br/>
-    &nbsp;&nbsp;&nbsp;&nbsp;额定交流输出功率（W）<br/>
-    &nbsp;&nbsp;&nbsp;&nbsp;最大输出功率（VA）<br/>
-    &nbsp;&nbsp;&nbsp;&nbsp;最大交流输出电流（A）<br/>
-    &nbsp;&nbsp;&nbsp;&nbsp;额定电网电压（V）<br/>
-    &nbsp;&nbsp;&nbsp;&nbsp;最大效率（%）<br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;候选键{名称，型号，导体截面（mm^2）}<br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;允许载流量(A)<br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;容量（W）<br/>
   </p>
   <h2>3.返回数据格式：</h2>
   <p class="lead">&nbsp;&nbsp;&nbsp;&nbsp;直接拿数据用<a href="http://tool.oschina.net/codeformat/json">Json格式化工具</a>看</p>

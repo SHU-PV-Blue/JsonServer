@@ -27,6 +27,9 @@
   <h2><a href="inverter-tandem/index.jsp">组串式逆变器数据接口</a></h2>
   <h2><a href="inverter-centralized/index.jsp">集中式逆变器数据接口</a></h2>
   <h2><a href="inverter-phase/index.jsp">相位逆变器数据接口</a></h2>
+  <h2><a href="cable/index.jsp">电缆数据接口</a></h2>
+  <h2><a href="dc-distribution/index.jsp">直流配电柜数据接口</a></h2>
+  <h2><a href="dc-combiner/index.jsp">直流汇流箱数据接口</a></h2>
 </div>
 <div class="panel panel-default center-block text-center" style="width:800px;padding:10px">
   <h2>通用状态码说明：</h2>
