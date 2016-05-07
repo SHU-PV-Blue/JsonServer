@@ -96,6 +96,11 @@ public class WeatherAction extends ActionSupport {
 		Weather humidity = (Weather)session.get(Weather.class, new WeatherPK("humidity", latValue, lonValue));
 		Weather wind = (Weather)session.get(Weather.class, new WeatherPK("wind", latValue, lonValue));
 
+		Weather H0 = (Weather)session.get(Weather.class, new WeatherPK("H0", latValue, lonValue));
+		Weather Hd = (Weather)session.get(Weather.class, new WeatherPK("Hd", latValue, lonValue));
+		Weather Kt = (Weather)session.get(Weather.class, new WeatherPK("Kt", latValue, lonValue));
+		Weather Ws = (Weather)session.get(Weather.class, new WeatherPK("Ws", latValue, lonValue));
+
 		session.close();
 		sessionFactory.close();
 
@@ -110,16 +115,26 @@ public class WeatherAction extends ActionSupport {
 		Double[] humidityData = getDataArray(humidity);
 		Double[] windData = getDataArray(wind);
 
+		Double[] H0Data = getDataArray(H0);
+		Double[] HdData = getDataArray(Hd);
+		Double[] KtData = getDataArray(Kt);
+		Double[] WsData = getDataArray(Ws);
+
 		dataMap.put("lat", latValue);
 		dataMap.put("lon", lonValue);
 
 		Map<String,Object>[] dataArray = new Map[12];
 		for(int i = 0; i < 12; ++i){
 			Map<String,Object> tempMap = new HashMap<>();
-			tempMap.put("i", irradianceData[i]);
-			tempMap.put("t", temperatureData[i]);
-			tempMap.put("h", humidityData[i]);
-			tempMap.put("w", windData[i]);
+			tempMap.put("H", irradianceData[i]);
+			tempMap.put("temperature", temperatureData[i]);
+			tempMap.put("humidity", humidityData[i]);
+			tempMap.put("wind", windData[i]);
+
+			tempMap.put("H0", H0Data[i]);
+			tempMap.put("Hd", HdData[i]);
+			tempMap.put("Kt", KtData[i]);
+			tempMap.put("Ws", WsData[i]);
 			dataArray[i] = tempMap;
 		}
 		dataMap.put("data", dataArray);
