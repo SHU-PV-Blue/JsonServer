@@ -46,5 +46,15 @@
                 <param name="root">dataMap</param>
             </result>
         </action>
+        <action name="switch" class="com.wolfogre.action.SwitchAction">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        <action name="transformer" class="com.wolfogre.action.TransformerAction">
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
     </package>
 </struts>
